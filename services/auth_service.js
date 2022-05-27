@@ -66,14 +66,14 @@ module.exports = class AuthService {
     // Check if user exists
     const userphoneExist = await User.findOne({ phone: data.phone });
     const errorEmail = {
-      email: null,
+      errorMsg: "This Phone number is already in use.",
     };
     // console.log(userphoneExist);
     if (userphoneExist) return error_json(400, errorEmail);
 
     const emailExist = await User.findOne({ email: data.email });
     const errorUsername = {
-      email: "This email is already in use.",
+      errorMsg: "This email is already in use.",
     };
     if (emailExist) return error_json(400, errorUsername);
 
