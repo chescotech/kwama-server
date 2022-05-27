@@ -70,15 +70,19 @@ module.exports = class AuthService {
         .select()
         .from("customers")
         .where({ phone: data.phone })
-        .then(list => {
-          console.log(list);
+        .then(phoneNumber => {
+          console.log(phoneNumber);
+          
+          if (phoneNumber.length != 0) {
+            const errorEmail = {
+              errorMsg: "This Phone number is already in use.",
+            };
+            // console.log(userphoneExist);
+            if (userphoneExist) return error_json(400, errorEmail);
+
+          }
         })
 
-    const errorEmail = {
-      errorMsg: "This Phone number is already in use.",
-    };
-    // console.log(userphoneExist);
-    if (userphoneExist) return error_json(400, errorEmail);
 
     const emailExist = await User.findOne({ email: data.email });
     const errorUsername = {
