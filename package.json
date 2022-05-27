@@ -26,6 +26,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.9.20",
     "nodemailer": "^6.7.5",
+    "objection": "^3.0.1",
     "pg": "^8.7.3"
   },
   "devDependencies": {

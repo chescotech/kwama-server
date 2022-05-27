@@ -7,6 +7,7 @@ require("dotenv").config();
 const { registerValidation, loginValidation } = require("../utils/validation");
 const { createSecureToken, createRefreshToken } = require("../routes/token");
 const { error_json, success_json } = require("../utils/helpers");
+const knex = require("../knex");
 
 module.exports = class AuthService {
   static async login(credentials) {
@@ -64,7 +65,15 @@ module.exports = class AuthService {
     if (error) return error_json(400, error.details[0].message);
 
     // Check if user exists
-    const userphoneExist = await User.findOne({ phone: data.phone });
+    const userphoneExist = await
+      knex()
+        .select()
+        .from("customers")
+        .where({ phone: data.phone })
+        .then(list => {
+          console.log(list);
+        })
+
     const errorEmail = {
       errorMsg: "This Phone number is already in use.",
     };
