@@ -11,6 +11,7 @@ exports.up = (pgm) => {
         email: { type: 'varchar(1000)', notNull: true },
         accountNumber: { type: 'varchar(1000)', notNull: true },
         nrc: { type: 'varchar(1000)', notNull: true },
+        phone: { type: 'varchar(1000)', notNull: true },
         photoUri: { type: 'varchar(1000)', notNull: true },
         password: { type: 'varchar(1000)', notNull: true },
         isActive: { type: 'boolean', notNull: true },

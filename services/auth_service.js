@@ -35,17 +35,16 @@ module.exports = class AuthService {
     if (!refreshToken) return error_json(500, "Error creating token");
 
     const userData = {
-      id: user._doc._id,
+      first_name: user._doc.fname,
+      last_name: user._doc.lname,
+      nrc: user._doc.nrc,
       email: user._doc.email,
-      fullName: "",
-      avatar: null,
-      role: "admin",
-      ability: [
-        {
-          action: "manage",
-          subject: "all",
-        },
-      ],
+      account: user._doc.accountNumber,
+      phone: user._doc.phone,
+      dob: user._doc.dob,
+      photoUri: user._doc.photoUri,
+      isActive: user._doc.isActive,
+      id: user._doc._id,
     };
 
     // console.log(userData);
