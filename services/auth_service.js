@@ -71,7 +71,7 @@ module.exports = class AuthService {
         .where({ phone: data.phone })
         .then(phoneNumber => {
           console.log(phoneNumber);
-          
+
           if (phoneNumber.length != 0) {
             const errorEmail = {
               errorMsg: "This Phone number is already in use.",
@@ -98,17 +98,33 @@ module.exports = class AuthService {
     const hashedPassword = await bcrypt.hash(data.password, salt);
 
     // Create and save the user
-    const user = new User({
-      fname: data.first_name,
-      lname: data.last_name,
-      dob: data.dob,
-      password: hashedPassword,
-      email: data.email,
-      accountNumber: data.account,
-      nrc: data.nrc,
-      photoUri: data.photo,
-      isActive: false,
-    });
+    // const user = new User({
+    //   fname: data.first_name,
+    //   lname: data.last_name,
+    //   dob: data.dob,
+    //   password: hashedPassword,
+    //   email: data.email,
+    //   accountNumber: data.account,
+    //   nrc: data.nrc,
+    //   photoUri: data.photo,
+    //   isActive: false,
+    // });
+
+    const user = await
+      knex("customers")
+        .insert({
+          fname: data.first_name,
+          lname: data.last_name,
+          dob: data.dob,
+          password: hashedPassword,
+          email: data.email,
+          accountNumber: data.account,
+          nrc: data.nrc,
+          photoUri: data.photo,
+          phone: data.phone,
+          isActive: false,
+        })
+
 
     const userData = {
       first_name: data.first_name,

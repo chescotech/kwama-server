@@ -15,6 +15,7 @@ exports.up = (pgm) => {
         photoUri: { type: 'varchar(1000)', notNull: true },
         password: { type: 'varchar(1000)', notNull: true },
         isActive: { type: 'boolean', notNull: true },
+        phone: { type: 'varchar(15)', notNull: true },
         createdAt: {
             type: 'timestamp',
             notNull: true,
